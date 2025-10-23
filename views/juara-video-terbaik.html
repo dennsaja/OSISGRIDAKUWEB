@@ -72,13 +72,24 @@
 <body>
 
   <!-- Main Site Iframe -->
-  <iframe src="https://osisgridaku.framer.ai/juara-video-terbaik" allowfullscreen loading="lazy" title="OSIS Gridaku"></iframe>
+  <iframe id="myframe" src="https://osisgridaku.framer.ai/juara-video-terbaik" allowfullscreen loading="lazy" title="OSIS Gridaku"></iframe>
 
  <!-- <script>
         setTimeout(() => {
           window.location.href = '/e';
         }, 2000);
   </script> -->
+  <script>
+  const frame = document.getElementById('myframe');
+
+  frame.addEventListener('load', () => {
+    const doc = frame.contentDocument || frame.contentWindow.document;
+
+    // cari dan sembunyikan elemen dengan ID __framer-badge-container
+    const badge = doc.querySelector('#__framer-badge-container');
+    if (badge) badge.style.display = 'none';
+  });
+</script>
   <script src="https://uptime.betterstack.com/widgets/announcement.js" data-id="220711" async="async" type="text/javascript"></script>
 </body>
 </html>
