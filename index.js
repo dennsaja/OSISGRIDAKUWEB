@@ -1,7 +1,6 @@
 // Import packages
 const express = require("express");
 const path = require("path");
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 require("dotenv").config(); // optional: load TOKEN dari .env
 
 // Import routes
