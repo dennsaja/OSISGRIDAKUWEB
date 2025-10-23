@@ -1,7 +1,6 @@
 // Import packages
 const express = require("express");
 const path = require("path");
-require("dotenv").config(); // optional: load TOKEN dari .env
 
 // Import routes
 const errorsys = require("./routes/error-system");
