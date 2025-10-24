@@ -1,6 +1,7 @@
 // Import packages
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 
 // Import routes
 const errorsys = require("./routes/error-system");
@@ -15,6 +16,11 @@ const PORT = process.env.PORT || 9001;
 
 // Middlewares
 app.use(express.json());
+app.use(cors({
+  origin: ["https://framer.com", /\.framer\.website$/], // izinkan framer & subdomain-nya
+  methods: ["GET"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // Routes
 app.use("/", index);
