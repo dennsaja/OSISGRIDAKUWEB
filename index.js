@@ -38,7 +38,7 @@ async function fetchBetterStack(endpoint) {
 }
 
 async function fetchWorldTime(endpoint) {
-  const url = `https://worldtimeapi.org/api/${endpoint}`;
+  const url = `https://worldtimeapi.org/api/ip`;
   const res = await fetch(url);
 
   // tetap aman untuk error response
