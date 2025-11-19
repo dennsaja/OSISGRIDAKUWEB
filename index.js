@@ -37,6 +37,17 @@ async function fetchBetterStack(endpoint) {
   return { status: res.status, contentType, body };
 }
 
+async function fetchWorldTime(endpoint) {
+  const url = `https://worldtimeapi.org/api/${endpoint}`;
+  const res = await fetch(url);
+
+  // tetap aman untuk error response
+  const contentType = res.headers.get("content-type") || "application/json";
+  const body = await res.text();
+
+  return { status: res.status, contentType, body };
+}
+
 // --- API Proxy Routes ---
 app.get("/app/monitor/:id", async (req, res) => {
   try {
@@ -50,6 +61,27 @@ app.get("/app/monitor/:id", async (req, res) => {
 app.get("/app/monitor/:id/response-times", async (req, res) => {
   try {
     const { status, contentType, body } = await fetchBetterStack(`monitors/${req.params.id}/response-times`);
+    res.status(status).type(contentType).send(body);
+  } catch (err) {
+    res.status(500).json({ error: "Proxy error", detail: err.message });
+  }
+});
+
+// --- API Proxy Routes ---
+app.get("/app/time/ip", async (req, res) => {
+  try {
+    const { status, contentType, body } = await fetchWorldTime("ip");
+    res.status(status).type(contentType).send(body);
+  } catch (err) {
+    res.status(500).json({ error: "Proxy error", detail: err.message });
+  }
+});
+
+// contoh lain: timezone khusus
+app.get("/app/time/:zone", async (req, res) => {
+  try {
+    const zone = req.params.zone; // contoh: Asia/Jakarta
+    const { status, contentType, body } = await fetchWorldTime(`timezone/${zone}`);
     res.status(status).type(contentType).send(body);
   } catch (err) {
     res.status(500).json({ error: "Proxy error", detail: err.message });
