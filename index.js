@@ -2,12 +2,13 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const fetch = require("node-fetch"); // penting jika Node < 18
 
 // Import routes
 const errorsys = require("./routes/error-system");
 const index = require("./routes/index");
 
-// Environment variable (lebih aman)
+// Environment variable
 const TOKEN = process.env.BETTERSTACK_TOKEN || "ocBP47vc5zLvNPHJahqK6Fbe";
 
 // Initialize app
@@ -17,7 +18,7 @@ const PORT = process.env.PORT || 9001;
 // Middlewares
 app.use(express.json());
 app.use(cors({
-  origin: ["https://framer.com", /\.framer\.website$/], // izinkan framer & subdomain-nya
+  origin: ["https://framer.com", /\.framer\.website$/],
   methods: ["GET"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
@@ -26,29 +27,27 @@ app.use(cors({
 app.use("/", index);
 app.use("/err", errorsys);
 
-// --- Helper function untuk request ke BetterStack API ---
+// --- BetterStack Helper ---
 async function fetchBetterStack(endpoint) {
   const url = `https://uptime.betterstack.com/api/v2/${endpoint}`;
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${TOKEN}` },
   });
   const contentType = res.headers.get("content-type") || "application/json";
-  const body = await res.text(); // biar tetap aman untuk error response
+  const body = await res.text();
   return { status: res.status, contentType, body };
 }
 
-async function fetchWorldTime() {
-  const url = `https://worldtimeapi.org/api/ip`;
+// --- WorldTime Helper ---
+async function fetchWorldTime(endpoint) {
+  const url = `https://worldtimeapi.org/api/${endpoint}`;
   const res = await fetch(url);
-
-  // tetap aman untuk error response
   const contentType = res.headers.get("content-type") || "application/json";
   const body = await res.text();
-
   return { status: res.status, contentType, body };
 }
 
-// --- API Proxy Routes ---
+// --- BetterStack Routes ---
 app.get("/app/monitor/:id", async (req, res) => {
   try {
     const { status, contentType, body } = await fetchBetterStack(`monitors/${req.params.id}`);
@@ -67,18 +66,20 @@ app.get("/app/monitor/:id/response-times", async (req, res) => {
   }
 });
 
-// --- API Proxy Routes ---
+// --- WorldTime Routes ---
+
+// 1. waktu berdasarkan IP (HARUS duluan)
 app.get("/app/time/ip", async (req, res) => {
   try {
-    const { status, contentType, body } = await fetchWorldTime()
+    const { status, contentType, body } = await fetchWorldTime("ip");
     res.status(status).type(contentType).send(body);
   } catch (err) {
     res.status(500).json({ error: "Proxy error", detail: err.message });
   }
 });
 
-// contoh lain: timezone khusus
-app.get("/app/time/:zone", async (req, res) => {
+// 2. waktu berdasarkan timezone
+app.get("/app/time/zone/:zone", async (req, res) => {
   try {
     const zone = req.params.zone; // contoh: Asia/Jakarta
     const { status, contentType, body } = await fetchWorldTime(`timezone/${zone}`);
