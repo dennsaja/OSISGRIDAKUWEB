@@ -37,7 +37,7 @@ async function fetchBetterStack(endpoint) {
   return { status: res.status, contentType, body };
 }
 
-async function fetchWorldTime(endpoint) {
+async function fetchWorldTime() {
   const url = `https://worldtimeapi.org/api/ip`;
   const res = await fetch(url);
 
@@ -70,7 +70,7 @@ app.get("/app/monitor/:id/response-times", async (req, res) => {
 // --- API Proxy Routes ---
 app.get("/app/time/ip", async (req, res) => {
   try {
-    const { status, contentType, body } = await fetchWorldTime("ip");
+    const { status, contentType, body } = await fetchWorldTime()
     res.status(status).type(contentType).send(body);
   } catch (err) {
     res.status(500).json({ error: "Proxy error", detail: err.message });
