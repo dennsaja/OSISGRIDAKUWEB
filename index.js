@@ -37,9 +37,8 @@ async function fetchBetterStack(endpoint) {
   return { status: res.status, contentType, body };
 }
 
-// --- WorldTime Helper ---
-async function fetchWorldTime() {
-  const url = `https://worldtimeapi.org/api/ip`;
+async function fetchTimeAPI(zone = "Asia/Jakarta") {
+  const url = `https://timeapi.io/api/Time/current/zone?timeZone=${zone}`;
   const res = await fetch(url);
   const contentType = res.headers.get("content-type") || "application/json";
   const body = await res.text();
@@ -65,23 +64,9 @@ app.get("/app/monitor/:id/response-times", async (req, res) => {
   }
 });
 
-// --- WorldTime Routes ---
-
-// 1. waktu berdasarkan IP (HARUS duluan)
-app.get("/app/time/default", async (req, res) => {
+app.get("/app/time/ip", async (req, res) => {
   try {
-    const { status, contentType, body } = await fetchWorldTime();
-    res.status(status).type(contentType).send(body);
-  } catch (err) {
-    res.status(500).json({ error: "Proxy error", detail: err.message });
-  }
-});
-
-// 2. waktu berdasarkan timezone
-app.get("/app/time/default/:zone", async (req, res) => {
-  try {
-    const zone = req.params.zone; // contoh: Asia/Jakarta
-    const { status, contentType, body } = await fetchWorldTime(`timezone/${zone}`);
+    const { status, contentType, body } = await fetchTimeAPI("Asia/Jakarta");
     res.status(status).type(contentType).send(body);
   } catch (err) {
     res.status(500).json({ error: "Proxy error", detail: err.message });
