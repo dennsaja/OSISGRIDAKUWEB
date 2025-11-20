@@ -2,7 +2,6 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const fetch = require("node-fetch"); // penting jika Node < 18
 
 // Import routes
 const errorsys = require("./routes/error-system");
