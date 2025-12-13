@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 // Routes
-app.use("/app", index);
+app.use("/", index);
 app.use("/err", errorsys);
 
 // --- BetterStack Helper ---
@@ -64,7 +64,7 @@ app.get("/app/monitor/:id/response-times", async (req, res) => {
   }
 });
 
-app.get("/", async (req, res) => {
+app.get("/app/monitor/asiajakarta", async (req, res) => {
   try {
     const { status, contentType, body } = await fetchTimeAPI("Asia/Jakarta");
     res.status(status).type(contentType).send(body);
