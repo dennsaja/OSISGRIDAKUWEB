@@ -19,7 +19,7 @@ router.get("/juara-video-terbaik", async (req, res, next) => {
 });
 
 router.get("/loaderio-c7ed40825cffbbdac794d2aec21790fc.text", async (req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', 'views', 'loaderio-c7ed40825cffbbdac794d2aec21790fc.text'));
+  res.sendFile(path.join(__dirname, '..', 'views', 'loaderio-c7ed40825cffbbdac794d2aec21790fc.txt'));
 });
 
 module.exports = router;
