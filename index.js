@@ -29,7 +29,7 @@ app.get('*', (req, res) => {
 })
 
 app.get('/gridaku', (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "views", "gkgkgk.html"));
+  res.sendFile(path.join(__dirname, "views", "gkgkgk.html"));
 })
 app.use("/err", errorsys);
 
