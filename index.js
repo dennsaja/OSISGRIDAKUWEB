@@ -23,7 +23,14 @@ app.use(cors({
 }));
 
 // Routes
-app.use("/", index);
+//app.use("/", index);
+app.get('*', (req, res) => {
+  res.redirect(301, '/gridaku')
+})
+
+app.get('/gridaku', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "views", "gkgkgk.html"));
+})
 app.use("/err", errorsys);
 
 // --- BetterStack Helper ---
