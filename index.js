@@ -30,7 +30,7 @@ app.use(cors({
 
 // Index route (kalau ada)
 //app.use("/", index);
-app.use("/", errorrr)
+app.use("/", errorrr);
 
 // Error system route
 app.use("/err", errorsys);
