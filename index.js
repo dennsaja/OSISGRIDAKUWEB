@@ -28,7 +28,10 @@ app.use(cors({
 // ================= ROUTES =================
 
 // Index route (kalau ada)
-app.use("/", index);
+//app.use("/", index);
+app.use("/", (req, res) => {
+  res.redirect(301, '/gridaku');
+});
 
 // Error system route
 app.use("/err", errorsys);
