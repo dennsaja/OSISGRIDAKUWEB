@@ -85,9 +85,7 @@ app.get("/app/monitor/asiajakarta", async (req, res) => {
 });
 
 // ================= REDIRECT (PALING BAWAH) =================
-app.get('*', (req, res) => {
-  res.redirect(301, '/gridaku');
-});
+
 
 // --- 404 handler (kalau redirect dihapus) ---
 // app.use((req, res) => {
