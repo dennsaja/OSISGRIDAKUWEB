@@ -9,6 +9,7 @@ const cors = require("cors");
 // Import routes
 const errorsys = require("./routes/error-system");
 const index = require("./routes/index");
+const errorr = require("./routes/gkgkgk");
 
 // Environment variable (WAJIB pakai env di production)
 const TOKEN = process.env.BETTERSTACK_TOKEN;
@@ -29,9 +30,7 @@ app.use(cors({
 
 // Index route (kalau ada)
 //app.use("/", index);
-app.use("/", (req, res) => {
-  res.redirect(301, '/gridaku');
-});
+app.use("/", errorrr)
 
 // Error system route
 app.use("/err", errorsys);
