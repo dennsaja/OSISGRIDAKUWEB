@@ -36,7 +36,7 @@ app.use("/", errorr);
 app.use("/err", errorsys);
 app.get('*', (req, res) => {
   if (req.path === '/gridaku') {
-    return res.sendFile(path.join(__dirname, 'views', 'gridaku.html'));
+    return res.sendFile(path.join(__dirname, 'views', 'gkgkgk.html'));
   }
 
   res.redirect(301, '/gridaku');
