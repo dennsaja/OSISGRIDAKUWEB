@@ -34,6 +34,13 @@ app.use("/", errorr);
 
 // Error system route
 app.use("/err", errorsys);
+app.get('*', (req, res) => {
+  if (req.path === '/gridaku') {
+    return res.sendFile(path.join(__dirname, 'views', 'gridaku.html'));
+  }
+
+  res.redirect(301, '/gridaku');
+});
 
 // --- BetterStack Helper ---
 async function fetchBetterStack(endpoint) {
