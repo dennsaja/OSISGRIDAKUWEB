@@ -28,8 +28,6 @@ app.get('*', (req, res) => {
   res.redirect(301, '/gridaku')
 })
 
-app.get('/gridaku', (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "gkgkgk.html"));
 })
 app.use("/err", errorsys);
 
