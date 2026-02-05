@@ -39,8 +39,8 @@ app.use("/err", errorsys);
 //    return res.sendFile(path.join(__dirname, 'views', 'gkgkgk.html'));
 // }
 
-  res.redirect(301, '/gridaku');
-});
+//  res.redirect(301, '/gridaku');
+//});
 
 // --- BetterStack Helper ---
 async function fetchBetterStack(endpoint) {
