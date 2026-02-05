@@ -29,15 +29,15 @@ app.use(cors({
 // ================= ROUTES =================
 
 // Index route (kalau ada)
-//app.use("/", index);
-app.use("/", errorr);
+app.use("/", index);
+//app.use("/", errorr);
 
 // Error system route
 app.use("/err", errorsys);
-app.get('*', (req, res) => {
-  if (req.path === '/gridaku') {
-    return res.sendFile(path.join(__dirname, 'views', 'gkgkgk.html'));
-  }
+//app.get('*', (req, res) => {
+//  if (req.path === '/gridaku') {
+//    return res.sendFile(path.join(__dirname, 'views', 'gkgkgk.html'));
+// }
 
   res.redirect(301, '/gridaku');
 });
@@ -94,10 +94,10 @@ app.get("/app/monitor/asiajakarta", async (req, res) => {
 // ================= REDIRECT (PALING BAWAH) =================
 
 
-// --- 404 handler (kalau redirect dihapus) ---
-// app.use((req, res) => {
-//   res.status(404).sendFile(path.join(__dirname, "views", "notfound.json"));
-// });
+ --- 404 handler (kalau redirect dihapus) ---
+ app.use((req, res) => {
+   res.status(404).sendFile(path.join(__dirname, "views", "notfound.json"));
+ });
 
 // --- Start server ---
 app.listen(PORT, () => {
