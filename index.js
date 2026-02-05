@@ -94,7 +94,6 @@ app.get("/app/monitor/asiajakarta", async (req, res) => {
 // ================= REDIRECT (PALING BAWAH) =================
 
 
- --- 404 handler (kalau redirect dihapus) ---
  app.use((req, res) => {
    res.status(404).sendFile(path.join(__dirname, "views", "notfound.json"));
  });
