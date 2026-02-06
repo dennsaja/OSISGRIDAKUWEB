@@ -12,7 +12,7 @@ router.get("/dokumentasi-osis", async (req, res, next) => {
 
 router.get("/dokumentasi-osis/kcmcri0", async (req, res, next) => {
   res.redirect(
-    "https://drive.google.com/drive/folders/1u6lwzjWNISfFQ2c7ZeSTABA7VXqH96JX?usp=drive_link"
+    "https://osisgridaku.framer.ai/docs/0/jalan-sehat-(baru-di-update)"
   );
 });
 
