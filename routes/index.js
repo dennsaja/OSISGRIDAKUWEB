@@ -10,6 +10,12 @@ router.get("/dokumentasi-osis", async (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'views', 'dokumentasi.html'));
 });
 
+router.get("/dokumentasi-osis/kcmcri0", async (req, res, next) => {
+  res.redirect(
+    "https://drive.google.com/drive/folders/1u6lwzjWNISfFQ2c7ZeSTABA7VXqH96JX?usp=drive_link"
+  );
+});
+
 router.get("/ngl", async (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'views', 'ngl.html'));
 });
