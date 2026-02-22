@@ -32,7 +32,7 @@ router.get("/loaderio-c7ed40825cffbbdac794d2aec21790fc.html", async (req, res, n
   res.sendFile(path.join(__dirname, '..', 'views', 'loaderio-c7ed40825cffbbdac794d2aec21790fc.txt'));
 });
 
-router.get("/get-it/pesantren-ramadan", (req, res) => {
+router.get("/get-it/pesantrenramadan/formulir-pengumpulan", (req, res) => {
   res.redirect("https://docs.google.com/forms/d/e/1FAIpQLScMil50ABok3Myx_EUO3QH76x6mxo-8w9s39f7nFVsOOqniYw/viewform?usp=header");
 });
 
