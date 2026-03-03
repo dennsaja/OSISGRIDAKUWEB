@@ -36,4 +36,8 @@ router.get("/get-it/pesantrenramadan/formulir-pengumpulan", (req, res) => {
   res.redirect("https://docs.google.com/forms/d/e/1FAIpQLScMil50ABok3Myx_EUO3QH76x6mxo-8w9s39f7nFVsOOqniYw/viewform?usp=header");
 });
 
+router.get("/dokumentasi-osis/pesantrenramadan", async (req, res, next) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'pesrom.html'));
+});
+
 module.exports = router;
